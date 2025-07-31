@@ -4,6 +4,7 @@ import crypto from 'crypto';
 import Profile from '../models/profile.model.js';
 
 
+// Controller for user registration and login
 export const register = async (req , res) => {
   try {
     const {name , email , password , username } = req.body;
@@ -47,7 +48,6 @@ export const register = async (req , res) => {
     return res.status(500).json({message: "Internal Server Error", error: error.message});
   }
 }
-
 
 export const login = async (req , res) => {
   try {
