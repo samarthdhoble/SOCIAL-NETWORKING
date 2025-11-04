@@ -9,7 +9,7 @@ import { workerData } from 'worker_threads';
 import path from "path";
 
 
-
+// convert user profile data to PDF
 export const convertUserDataToPDF = async (userProfile) => {
   // ---- Safety guards & fallbacks ----
   const user = userProfile?.userId || {};
@@ -158,8 +158,6 @@ export const convertUserDataToPDF = async (userProfile) => {
   return path.basename(outputPath);
 };
 
-
-
 // Controller for user registration and login
 export const register = async (req , res) => {
   try {
@@ -207,6 +205,7 @@ export const register = async (req , res) => {
   }
 }
 
+// Controller for user login
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -254,7 +253,7 @@ export const login = async (req, res) => {
   }
 };
 
-
+// Controller for uploading profile picture
 export const uploadProfilePicture = async (req, res) => {
   
   try {
@@ -285,7 +284,7 @@ export const uploadProfilePicture = async (req, res) => {
   }
 };
 
-
+// Controller for updating user profile
 export const updateUserProfile = async (req, res) => {
   try {
     const { token, name, username, email, password } = req.body;
@@ -315,7 +314,7 @@ export const updateUserProfile = async (req, res) => {
   }
 };
 
-
+// Controller for getting user and profile data
 export const getUserAndProfile = async (req, res) => {
   try {
     const { token } = req.body;
@@ -332,8 +331,7 @@ export const getUserAndProfile = async (req, res) => {
   }
 };
 
-
-
+// Controller for updating profile data
 export const updateProfileData = async (req, res) => {
   try {
     const { token, bio, currentPost, pastWork, education } = req.body;
@@ -356,8 +354,7 @@ export const updateProfileData = async (req, res) => {
   }
 };
 
-
-
+// Controller for getting all user profiles
 export const getAllUserProfile = async (req, res) => {
   try {
     const profiles = await Profile.find().populate('userId', 'name username email profilePicture');
@@ -369,8 +366,7 @@ export const getAllUserProfile = async (req, res) => {
   }
 }
 
-
-
+// Controller for downloading user profile as PDF
 export const downloadProfile = async (req, res) => {
 
   const user_id = req.query.id;
@@ -386,7 +382,7 @@ export const downloadProfile = async (req, res) => {
   return res.status(200).json({ message: "Profile downloaded successfully : " , outputPath });
 }
 
-
+// Controller for sending connection request
 export const sendConnectionRequest = async (req, res) => {
   const {token , connectionId } = req.body;
 
