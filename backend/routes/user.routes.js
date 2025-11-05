@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { activeCheck } from '../controllers/post.controller.js';
-import { register , login , uploadProfilePicture , updateUserProfile , getUserAndProfile , updateProfileData , getAllUserProfile, downloadProfile} from '../controllers/user.controller.js';
+import { register , login , uploadProfilePicture , updateUserProfile , getUserAndProfile , updateProfileData , getAllUserProfile, downloadProfile, sendConnectionRequest, getMyConnectionsRequest, whatAreMyConnections, acceptConnectionRequest} from '../controllers/user.controller.js';
 import multer from 'multer';
 
 const router = Router();
@@ -29,6 +29,10 @@ router.route('/get_user_and_profile').get(getUserAndProfile);
 router.route('/update_profile_data').post(updateProfileData);
 router.route('/user/all_user_profiles').get(getAllUserProfile);
 router.route('/user/download_resume').get(downloadProfile);
-router.route('/send_connection_request')
+router.route('/send_connection_request').post(sendConnectionRequest);
+router.route('/user/getConnectionRequests').get(getMyConnectionsRequest);
+router.route('/user/user_connection_request').get(whatAreMyConnections0);
+router.route('/user/accept_connection_request').post(acceptConnectionRequest);
+
 
 export default router;
