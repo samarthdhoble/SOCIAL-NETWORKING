@@ -31,7 +31,7 @@ router.route('/user/all_user_profiles').get(getAllUserProfile);
 router.route('/user/download_resume').get(downloadProfile);
 router.route('/send_connection_request').post(sendConnectionRequest);
 router.route('/user/getConnectionRequests').get(getMyConnectionsRequest);
-router.route('/user/user_connection_request').get(whatAreMyConnections0);
+router.route('/user/user_connection_request').get(whatAreMyConnections);
 router.route('/user/accept_connection_request').post(acceptConnectionRequest);
 
 
