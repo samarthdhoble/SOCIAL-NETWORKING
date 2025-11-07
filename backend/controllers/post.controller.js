@@ -121,7 +121,7 @@ export const commentPost = async (req, res) => {
 };
 
 
-const get_comments_by_post = async (req , res) => {
+export const get_comments_by_post = async (req , res) => {
 
   const {post_id} = req.body;
   try {
@@ -141,7 +141,7 @@ const get_comments_by_post = async (req , res) => {
 
 };
 
-const delete_comment_of_user = async (req , res) => {
+export const delete_comment_of_user = async (req , res) => {
   const { token , comment_id } = req.body;
   try {
 
