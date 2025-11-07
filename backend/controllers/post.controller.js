@@ -85,3 +85,58 @@ export const deletePost = async (req, res) => {
 }
 
 
+
+export const commentPost = async (req, res) => {
+
+  const { token , post_id , commentBody } = req.body;
+
+  try {
+    const user = await User.findOne({token : token}).select('_id');
+
+    if (!user) {
+      return res.status(404).json({message : 'User not found!'});
+    }
+
+    const post = await Post.findOne({_id : post_id});
+
+    if (!post) {
+      return res.status(404).json({message : 'Post not found!'});
+    }
+
+    const newComment = new Comment({
+      userId : user._id,
+      PostId : post._id,
+      body : commentBody
+    });    
+
+    await Comment.save();
+
+    return res.status(200).json({message : 'Comment added successfully!', comment : newComment});
+
+
+  }
+  catch(err){
+    return res.status(500).json({message : 'Internal Server Error', error : err.message});
+  }
+};
+
+
+const get_comments_by_post = async (req , res) => {
+
+  const {post_id} = req.body;
+  try {
+
+    const post = await Post.findOne({_id : post_id});
+    if (!post) {
+      return res.status(404).json({message : 'Post not found!'});
+    }
+
+    return res.status(200).json({comments : post.comments}); 
+
+
+
+  } catch(err) {
+    return res.status(500).json({message : 'Internal Server Error', error : err.message});
+  }
+
+};
